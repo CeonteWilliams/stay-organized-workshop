@@ -22,6 +22,28 @@
   
   /* Add a color to the active/current link */
   .topnav a.active {
-    background-color: #04AA6D;
+    background-color: rgb(135,206,250);
     color: white;
   }
+
+  html {
+    background-color: rgb(123,104,238);
+  }
+
+  h1 {
+    font-family: 'Montserrat Alternates', sans-serif;
+    text-align: center;
+  }
+
+  img {
+    width: 1500px;
+    height: 1000px;
+    border: 10px solid rgb(0,250,154);
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
