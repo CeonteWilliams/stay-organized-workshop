@@ -16,7 +16,7 @@ function getUsers() {
 function populateUsers(users) {
     let html = ""
     for (const currentUser of users) {
-        html += `<option value="${currentUser.id}">${currentUser.username}</option>`
+        html += `<option value="${currentUser.id}">${currentUser.name}</option>`
     }
     
     const Users = document.getElementById("UserSelect")
