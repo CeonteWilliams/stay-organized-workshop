@@ -1,28 +1,24 @@
 "user strict"
 
-window.onload = function(_event){
-    getuser()
-    .then(populateUsers)
+window.onload = function (_event) {
+    getUsers()
+        .then(populateUsers)
 
-const Users = document.getElementById("UserSelect")
-
-}
-
-function getuser(){
-
-return fetch(`http://127.0.0.1:8083/api/users`)
-.then(response => response.json())
+    const UsersChoice = document.getElementById("UserSelect")
 
 }
 
-function populateUsers(users,Users){
-let html = ""
-for (let index = 0; users< users.length; index+= 1) {
-    const element = users[index];
-    html+= `<option value=${users.name}${users.id}${users.username}</option>`
+function getUsers() {
+    return fetch(`http://127.0.0.1:8083/api/users`)
+        .then(response => response.json())
+}
 
-}console.log(users)
-
-
-
+function populateUsers(users) {
+    let html = ""
+    for (const currentUser of users) {
+        html += `<option value="${currentUser.id}">${currentUser.username}</option>`
+    }
+    
+    const Users = document.getElementById("UserSelect")
+    Users.innerHTML += html
 }
