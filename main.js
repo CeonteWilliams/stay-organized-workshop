@@ -19,34 +19,27 @@ function populateUsers(users) {
     for (const currentUser of users) {
         html += `<option value="${currentUser.id}">${currentUser.name}</option>`
     }
-    
+
     const Users = document.getElementById("UserSelect")
     Users.innerHTML += html
 }
-function displayUserTasks(userId) {
-    const selectedTasks = event.target.value
-    fetch(`http://127.0.0.1:8083/api/todos/${selectedTasks}`)
+function displayUserTasks(event) {
+    const selectedUserId = event.target.value
+    fetch(`http://127.0.0.1:8083/api/todos/byuser/${selectedUserId}`)
         .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            return data.category
-        })
-        .then(renderUserCard)
+        .then(renderTasks)
 }
 
-function renderUserCard(tasks) {
-    let html = '';
-    for (let index = 0; index < tasks.length; index += 1) {
-        const user = user[index];
-        html += `
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-header">${currentTask.name}</h5>
-                </div>
-            </div>
-        `
+function renderTasks(todos) {
+
+    let html = ""
+    for (let index = 0; index < todos.length; index += 1) {
+        const task = todos[index];
+        html += `<h5> tasks: ${task.userid}, ${task.category}, ${task.description} </h5>`
     }
-    const resultDiv = getElementById(UserSelect)
-    resultDiv.innerHTML += html 
+    const resultsDiv = document.getElementById("todoResults")
+    resultsDiv.innerHTML = html
+
 }
+
+
