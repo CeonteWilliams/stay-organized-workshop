@@ -1,3 +1,4 @@
+ function fetchAndPopulateDropdowns() {
 //fetching usernames from the API by calling api/users
 
 fetch("http://localhost:8083/api/users")
@@ -34,68 +35,27 @@ fetch("http://localhost:8083/api/categories")
         });
     })
     .catch(error => console.error('Error fetching categories:', error));
-
-
-    const formElement = document.querySelector('.toDoform')
-
-    formElement.addEventListener('submit', event => {
-        event.preventDefault();
-
-        const toDoformData = new FormData(formElement)
-        const data = new URLSearchParams(toDoformData)
-        
-        fetch("http://localhost:8083/api/todos", {
-            method: "POST",
-                body: data
-            }).then(response => response.json())
-              .then(data => console.log(data))
-              .catch(error => console.log(error))
-    })
-
-
-
-
-
-
-/* window.onload = function () {
-  const taskArea = document.getElementById("taskArea")
-  const addToDo = document.getElementById("addToDo")
-
-
-  addTask.addEventListener("click", function name(params) {
-    const taskDescription = taskArea.value.trim()
-
-    if (taskDescription !== "") {
-        addTask(taskDescription)
-    }
-    
-  })
-
-function addTask(taskDescription){
-    const apiUrl = "http://localhost:8083/api/todos"
-
-    fetch(apiUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ task: taskDescription})
-    })
-    .then(response => response.json())
-    .then(data => {
-        displayTask(data.task)
-    })
-    .catch(error => console.error("Error adding task:", error))
-}
-function displayTask(taskDescription) {
-    const taskArea = document.createElement("description")
-    taskArea.textContent = taskDescription
-    taskArea.appendChild(taskArea)
-    
 }
 
-} */
+    
+function addTodo() {
+    const formData = new FormData(document.getElementById('toDoForm'));
 
+  fetch('http://localhost:8083/api/todos', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = `ToDo added successfully. ID: ${data.id}, Description: ${data.description}`;
+        })
+        .catch(error => {
+            console.error('Error adding ToDo:', error);
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Error adding ToDo. Please try again.';
+        });
+}
 
-
+fetchAndPopulateDropdowns();
 
