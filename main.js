@@ -1,4 +1,4 @@
-"user strict"
+"use strict"
 
 window.onload = function (_event) {
     getUsers()
